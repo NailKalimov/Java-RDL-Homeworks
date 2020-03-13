@@ -1,8 +1,8 @@
 # Java Multithreading
 
-## Task #1: Bank and Bank Users
+## Task #1: BankAndUser.Bank and BankAndUser.Bank Users
 
-A Bank class description:
+A BankAndUser.Bank class description:
 1. private field moneyAmount;
 2. public method transferMoney(int amount) - takes requested sum of money, throws exception in case of requested sum is bigger 
 than total money amount;
@@ -10,13 +10,13 @@ than total money amount;
 
 In case of attempt to get more money than available the program should print the error and shut down.
 
-A Bank User class description:
-The Bank User runs in separate thread and tries to take transfer money periodically while it is possible.
+A BankAndUser.Bank User class description:
+The BankAndUser.Bank User runs in separate thread and tries to take transfer money periodically while it is possible.
 The withdraw money from the account:
-- the BankUser calls the hasEnoughMoney() method;
-- the BankUser calls transferMoney() method in case if hasEnoughMoney() returned True.
+- the BankAndUser.BankUser calls the hasEnoughMoney() method;
+- the BankAndUser.BankUser calls transferMoney() method in case if hasEnoughMoney() returned True.
 
-To run several BankUser objects with same Bank object.
+To run several BankAndUser.BankUser objects with same BankAndUser.Bank object.
 To analyze the reason of getting exception.
 
 Solve the issue using:

@@ -12,14 +12,14 @@ public class Bank {
     }
 
     public void transferMoney(int amount) throws BalanceError {
-        if(hasEnoughMoney(amount)){
+        if (hasEnoughMoney(amount)) {
             moneyAmount -= amount;
         } else {
             throw (new BalanceError("Not enough money in bank!"));
         }
     }
 
-    public boolean hasEnoughMoney(int amount){
-        return moneyAmount>=amount;
+    public boolean hasEnoughMoney(int amount) {
+        return moneyAmount >= amount;
     }
 }

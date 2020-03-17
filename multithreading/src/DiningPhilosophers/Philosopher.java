@@ -1,6 +1,6 @@
 package DiningPhilosophers;
 
-public class Philosopher implements Runnable{
+public class Philosopher implements Runnable {
     private final Fork leftFork;
     private final Fork rightFork;
     private int id;
@@ -14,20 +14,20 @@ public class Philosopher implements Runnable{
     void think() {
         System.out.println(nameOfPhilosopher() + "thinking");
         try {
-            Thread.sleep((int) (Math.random()*10));
+            Thread.sleep((int) (Math.random() * 10));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
     void eat() {
-        synchronized(leftFork){
+        synchronized (leftFork) {
             System.out.println(nameOfPhilosopher() + "takes the fork#" + leftFork.getNumberOfFork());
-            synchronized (rightFork){
+            synchronized (rightFork) {
                 System.out.println(nameOfPhilosopher() + "takes the fork#" + rightFork.getNumberOfFork());
                 System.out.println(nameOfPhilosopher() + "eats");
                 try {
-                    Thread.sleep((int) (Math.random()*10));
+                    Thread.sleep((int) (Math.random() * 10));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -37,13 +37,13 @@ public class Philosopher implements Runnable{
         System.out.println(nameOfPhilosopher() + "puts the fork#" + leftFork.getNumberOfFork() + " to the table");
     }
 
-    private String nameOfPhilosopher(){
+    private String nameOfPhilosopher() {
         return "DiningPhilosophers.Philosopher#" + id + " ";
     }
 
     @Override
     public void run() {
-        while (true){
+        while (true) {
             think();
             eat();
         }

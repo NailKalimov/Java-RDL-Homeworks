@@ -23,6 +23,8 @@ Solve the issue using:
 -  low level java synchronization tools;
 -  java.util.concurrent package.
 
+
+    - Answer: I used synchronization block in class BankUser 
 ## Task #2: The Dining Philosophers Problem
 
 The Dining Philosophers problem is one of the classic problems used to describe synchronization issues in a multi-threaded environment 
@@ -41,7 +43,9 @@ Each philosopher is a thread with same logic.
 The result of the task: output to the console of all philosopher's actions. 
 E.g.: "philosopher#1 takes the fork#1", "philosopher#1 takes the fork#5", "philosopher#1 eats", "philosopher#1 puts the fork#1 to the table" and so on. 
 The deadlock shouldn't happen.
-
+   
+    - Answer: Для решения проблемы deadlock-а я указал, чтобы один из философов брал сначала вилку с правой стороны,
+     а потом слева. Все остальные философы сначала берут вилку, лежащую слева, а потом справа.
 ## Task #3: ProducerAndConsumer.Producer ProducerAndConsumer.Consumer Problem
 
 There are two processes, the producer and the consumer, who share a common, fixed-size buffer used as a queue. 
@@ -54,7 +58,8 @@ The task is to solve the issue using Blocking Queue and Thread Pool from java.ut
 
 The Blocking Queue is shared fixed-size buffer.
 ProducerAndConsumer.Producer and ProducerAndConsumer.Consumer are running in separate threads.
-
+    
+    - Completed
 ## Task #4: Thread Safe Singleton
 
 Take a look at various implementation of the singleton pattern. 

@@ -3,7 +3,7 @@ package BankAndUser;
 public class BankAndUsersMain {
     public static void main(String[] args) throws BalanceError, InterruptedException {
 
-        while (true) {
+        for (int i=0; i<50; i++){
             Bank bank = new Bank(1000);
 
             Thread thread1 = new Thread(new BankUser(bank));

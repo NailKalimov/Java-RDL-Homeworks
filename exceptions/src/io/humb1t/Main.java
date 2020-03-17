@@ -1,5 +1,8 @@
 package io.humb1t;
 
+import io.humb1t.exceptions.IllegalNumberOfDoorException;
+import io.humb1t.exceptions.LifeCycleExecutionMyOwnException;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -7,7 +10,6 @@ import java.nio.file.AccessDeniedException;
 import java.util.Optional;
 
 public class Main {
-
     public static void main(String[] args) {
         try {
             new LifeCycleAction().execute();
@@ -23,10 +25,26 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //  Task 2: Create your own implementation of java.lang.AutoCloseable interface. Test it.
+        try (MyOwnAutoCloseableImplementation myOwnAutoCloseableImplementation = new MyOwnAutoCloseableImplementation()) {
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //  Task 3: Create a new class. Implement constructor which should throw an exception during execution.
+        // Write a simple program where you attempt to instantiate object of this class and assign it to a variable
+        // (declaration should be outside try/catch block). Catch an exception.
+        Car car = null;
+        try {
+            car = new Car(0);
+        } catch (IllegalNumberOfDoorException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     public static class LifeCycleAction {
-        public void execute() throws LifeCycleActionExecutionException, AccessDeniedException {
+        public void execute() throws LifeCycleActionExecutionException, AccessDeniedException, LifeCycleExecutionMyOwnException {
             throw new LifeCycleActionExecutionException();
         }
     }

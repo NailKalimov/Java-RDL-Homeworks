@@ -1,3 +1,5 @@
+package DiningPhilosophers;
+
 public class Philosopher implements Runnable{
     private final Fork leftFork;
     private final Fork rightFork;
@@ -36,7 +38,7 @@ public class Philosopher implements Runnable{
     }
 
     private String nameOfPhilosopher(){
-        return "Philosopher#" + id + " ";
+        return "DiningPhilosophers.Philosopher#" + id + " ";
     }
 
     @Override

@@ -42,7 +42,7 @@ The result of the task: output to the console of all philosopher's actions.
 E.g.: "philosopher#1 takes the fork#1", "philosopher#1 takes the fork#5", "philosopher#1 eats", "philosopher#1 puts the fork#1 to the table" and so on. 
 The deadlock shouldn't happen.
 
-## Task #3: Producer Consumer Problem
+## Task #3: ProducerAndConsumer.Producer ProducerAndConsumer.Consumer Problem
 
 There are two processes, the producer and the consumer, who share a common, fixed-size buffer used as a queue. 
 The producer's job is to generate data, put it into the buffer, and start again. 
@@ -53,7 +53,7 @@ and that the consumer won't try to remove data from an empty buffer.
 The task is to solve the issue using Blocking Queue and Thread Pool from java.util.concurrent package.
 
 The Blocking Queue is shared fixed-size buffer.
-Producer and Consumer are running in separate threads.
+ProducerAndConsumer.Producer and ProducerAndConsumer.Consumer are running in separate threads.
 
 ## Task #4: Thread Safe Singleton
 

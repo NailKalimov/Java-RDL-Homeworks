@@ -1,3 +1,5 @@
+package DiningPhilosophers;
+
 public class Fork {
     private int numberOfFork;
 

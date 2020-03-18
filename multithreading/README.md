@@ -68,6 +68,25 @@ What is their pros and cons?
 
 The result of this task should be implementation of thread safe singleton pattern with lazy initialization.
 
+    - Answer: 
+        --Eager initialization: 
+            pros: Very simple to implement.
+            cons: May lead to resource wastage. Because instance of class is created always, whether it is required or not.
+                  Exception handling is not possible.
+        --Eager initialization using static block:
+            pros: Very simple to implement.
+                  No need to implement getInstance() method. Instance can be accessed directly.
+                  Exceptions can be handled in static block.
+            cons: May lead to resource wastage. Because instance of class is created always, whether it is required or not.
+        --Lazy Thread Safe Singleton:
+            pros: Lazy initialization is possible.
+                  It is also thread safe.
+            cons: getInstance() method is synchronized so it causes slow performance as multiple threads can’t access it simultaneously.
+        --Lazy initialization with Double check locking:
+            pros: Lazy initialization is possible.
+                  It is also thread safe.
+                  Performance overhead gets reduced because of synchronized keyword.
+            cons: Supports only after JDK 1.5
 ## Useful materials and links
 1. Basic dive to the Multithreading in Java with nice examples.
 

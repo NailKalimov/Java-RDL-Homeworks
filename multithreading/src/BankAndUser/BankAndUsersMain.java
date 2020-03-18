@@ -1,7 +1,7 @@
 package BankAndUser;
 
 public class BankAndUsersMain {
-    public static void main(String[] args) throws BalanceError, InterruptedException {
+    public static void main(String[] args) throws InterruptedException {
 
         for (int i = 0; i < 50; i++) {
             Bank bank = new Bank(1000);

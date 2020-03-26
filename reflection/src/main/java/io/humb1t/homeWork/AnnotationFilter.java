@@ -1,29 +1,59 @@
 package io.humb1t.homeWork;
 
+import org.reflections.Reflections;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 public class AnnotationFilter {
-    public static void main(String[] args) {
-        Object[] objects = {new FirstDeprecatedClass(), new FirstNotAnnotatedClass(), new SecondNotAnnotatedClass()};
-        ArrayList<Object> deprecatedObjects = new ArrayList<>();
+    Reflections reflections = new Reflections();
+    Object[] arrayOfObjects;
+    HashMap<Class<?>, Set<Class<?>>> deprecatedClasses = new HashMap<>();
 
-        for (Object object : objects) {
-            if (object.getClass().isAnnotationPresent(Deprecated.class)) {
-                deprecatedObjects.add(object);
-                if (!object.getClass().getSuperclass().isAnnotationPresent(Deprecated.class)) {
-                    System.out.println("Вместо использования класса " + object.getClass().getSimpleName() +
-                            " рекомендуется использовать его родительский класс: " +
-                            object.getClass().getSuperclass().getName() + ", т.к. он не помечен @Deprecated");
-                } else if (object.getClass().getInterfaces().length != 0) {
-                    System.out.print("Интерфейсы класса " + object.getClass().getSimpleName() + " помеченного @Deprecated:");
-                    Arrays.stream(object.getClass().getInterfaces()).forEach(System.out::println);
+    public AnnotationFilter(Object[] objects) {
+        this.arrayOfObjects = objects;
+    }
+
+    void startSearchDeprecatedClasses() {
+        findDeprecatedClasses(arrayOfObjects);
+        System.out.println("Deprecated classes: ");
+        deprecatedClasses.keySet().forEach(System.out::println);
+        deprecatedClasses.forEach(AnnotationFilter::printRecommendation);
+    }
+
+    static void printRecommendation(Class<?> key, Set<Class<?>> set) {
+        System.out.println("Вместо класса " + key.getSimpleName() + " рекоммендуется использовать: ");
+        set.forEach(o -> System.out.println("-" + o.getName()));
+    }
+
+    private void findDeprecatedClasses(Object[] arrayOfObjects) {
+        for (Object obj : arrayOfObjects) {
+            Class<?> classOfObject = obj.getClass();
+            if (classOfObject.isAnnotationPresent(Deprecated.class)) {
+                deprecatedClasses.put(classOfObject, getRecommendationsForUsage(classOfObject));
+            }
+        }
+    }
+
+    private Set<Class<?>> getRecommendationsForUsage(Class<?> deprClass) {
+        Class<?> superClass = deprClass.getSuperclass();
+        Class<?>[] interfaces = deprClass.getInterfaces();
+        Set<Class<?>> recommendations = new LinkedHashSet<>();
+        if (!superClass.isAnnotationPresent(Deprecated.class) && superClass != Object.class
+                && reflections.getSubTypesOf(superClass).size() != 0) {
+            for (Class<?> childClass : reflections.getSubTypesOf(superClass)) {
+                if (!childClass.isAnnotationPresent(Deprecated.class)) {
+                    recommendations.add(childClass);
                 }
             }
         }
-        System.out.print("Массив объектов, помеченных @Deprecated: ");
-        deprecatedObjects.forEach(o -> System.out.println(o.toString()));
+        for (Class<?> parentInterface : interfaces) {
+            for (Class<?> childClass : reflections.getSubTypesOf(parentInterface)) {
+                if (!childClass.isAnnotationPresent(Deprecated.class)) {
+                    recommendations.add(childClass);
+                }
+            }
+        }
+        return recommendations;
     }
 }
 

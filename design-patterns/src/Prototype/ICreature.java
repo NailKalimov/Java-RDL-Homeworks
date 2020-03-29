@@ -1,6 +1,7 @@
 package Prototype;
 
 public interface ICreature {
-    void getName(); // имя
+    String getName(); // имя
+
     ICreature clone(); // сделать клона
 }

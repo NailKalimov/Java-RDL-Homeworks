@@ -1,8 +1,8 @@
 # Java Multithreading
 
-## Task #1: Bank and Bank Users
+## Task #1: BankAndUser.Bank and BankAndUser.Bank Users
 
-A Bank class description:
+A BankAndUser.Bank class description:
 1. private field moneyAmount;
 2. public method transferMoney(int amount) - takes requested sum of money, throws exception in case of requested sum is bigger 
 than total money amount;
@@ -10,19 +10,21 @@ than total money amount;
 
 In case of attempt to get more money than available the program should print the error and shut down.
 
-A Bank User class description:
-The Bank User runs in separate thread and tries to take transfer money periodically while it is possible.
+A BankAndUser.Bank User class description:
+The BankAndUser.Bank User runs in separate thread and tries to take transfer money periodically while it is possible.
 The withdraw money from the account:
-- the BankUser calls the hasEnoughMoney() method;
-- the BankUser calls transferMoney() method in case if hasEnoughMoney() returned True.
+- the BankAndUser.BankUser calls the hasEnoughMoney() method;
+- the BankAndUser.BankUser calls transferMoney() method in case if hasEnoughMoney() returned True.
 
-To run several BankUser objects with same Bank object.
+To run several BankAndUser.BankUser objects with same BankAndUser.Bank object.
 To analyze the reason of getting exception.
 
 Solve the issue using:
 -  low level java synchronization tools;
 -  java.util.concurrent package.
 
+
+    - Answer: I used synchronization block in class BankUser 
 ## Task #2: The Dining Philosophers Problem
 
 The Dining Philosophers problem is one of the classic problems used to describe synchronization issues in a multi-threaded environment 
@@ -41,8 +43,10 @@ Each philosopher is a thread with same logic.
 The result of the task: output to the console of all philosopher's actions. 
 E.g.: "philosopher#1 takes the fork#1", "philosopher#1 takes the fork#5", "philosopher#1 eats", "philosopher#1 puts the fork#1 to the table" and so on. 
 The deadlock shouldn't happen.
-
-## Task #3: Producer Consumer Problem
+   
+    - Answer: Для решения проблемы deadlock-а я указал, чтобы один из философов брал сначала вилку с правой стороны,
+     а потом слева. Все остальные философы сначала берут вилку, лежащую слева, а потом справа.
+## Task #3: ProducerAndConsumer.Producer ProducerAndConsumer.Consumer Problem
 
 There are two processes, the producer and the consumer, who share a common, fixed-size buffer used as a queue. 
 The producer's job is to generate data, put it into the buffer, and start again. 
@@ -53,8 +57,9 @@ and that the consumer won't try to remove data from an empty buffer.
 The task is to solve the issue using Blocking Queue and Thread Pool from java.util.concurrent package.
 
 The Blocking Queue is shared fixed-size buffer.
-Producer and Consumer are running in separate threads.
-
+ProducerAndConsumer.Producer and ProducerAndConsumer.Consumer are running in separate threads.
+    
+    - Completed
 ## Task #4: Thread Safe Singleton
 
 Take a look at various implementation of the singleton pattern. 
@@ -63,6 +68,25 @@ What is their pros and cons?
 
 The result of this task should be implementation of thread safe singleton pattern with lazy initialization.
 
+    - Answer: 
+        --Eager initialization: 
+            pros: Very simple to implement.
+            cons: May lead to resource wastage. Because instance of class is created always, whether it is required or not.
+                  Exception handling is not possible.
+        --Eager initialization using static block:
+            pros: Very simple to implement.
+                  No need to implement getInstance() method. Instance can be accessed directly.
+                  Exceptions can be handled in static block.
+            cons: May lead to resource wastage. Because instance of class is created always, whether it is required or not.
+        --Lazy Thread Safe Singleton:
+            pros: Lazy initialization is possible.
+                  It is also thread safe.
+            cons: getInstance() method is synchronized so it causes slow performance as multiple threads can’t access it simultaneously.
+        --Lazy initialization with Double check locking:
+            pros: Lazy initialization is possible.
+                  It is also thread safe.
+                  Performance overhead gets reduced because of synchronized keyword.
+            cons: Supports only after JDK 1.5
 ## Useful materials and links
 1. Basic dive to the Multithreading in Java with nice examples.
 
